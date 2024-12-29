@@ -14,13 +14,11 @@ class Record:
          self.phones = list(filter(lambda phone: phone == number, self.phones))
 
     def edit_phone(self, old_number, new_number):
-         for number in self.phones:
-              if number != old_number:
-                raise ValueError(f'Phone {old_number} not found!')
-              else:
-                self.phones = list(map(
-              lambda phone: Phone(new_number) if phone.value == old_number else phone, self.phones
+            if self.find_phone(old_number):  
+                self.phones = list(map(lambda phone: Phone(new_number) if phone.value == old_number else phone, self.phones
               ))
+            else:
+                raise ValueError(f'Phone {old_number} not found!')
          
     def find_phone(self, number:str):
         for phone in self.phones:
